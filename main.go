@@ -82,7 +82,7 @@ func main() {
 						return
 					}
 
-					inc := fmt.Sprintf("%s.%s %s \n%s\n--------\nИсточник: %s\n\n", day, mouth, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+					inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 					anDate := utils.RandAnswer(otherPreDate)
 					response := inc + anDate
 
@@ -98,7 +98,7 @@ func main() {
 				} else {
 					switch r.Request.Command {
 					case "еще", "ещё", "еще событие", "ещё событие", "еще события", "ещё события":
-						inc := fmt.Sprintf("%s.%s %s \n%s\n--------\nИсточник: %s\n\n", day, mouth, utils.RandAnswer(incidents), pen.Title, pen.Source)
+						inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), pen.Title, pen.Source)
 						fulldata := "Чтобы узнать подробности источника, скажите: Панёвин"
 						response := inc
 						resp.TextArray = []string{response, fulldata}
@@ -117,7 +117,7 @@ func main() {
 							resp.TTS = err.Error()
 							return
 						}
-						inc := fmt.Sprintf("%s.%s %s \n%s\n--------\nИсточник: %s\n\n", day, mouth, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+						inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 						anDate := utils.RandAnswer(otherPreDate)
 						response := inc + anDate
 
@@ -142,7 +142,7 @@ func main() {
 							resp.Text = err.Error()
 							resp.TTS = err.Error()
 						}
-						inc := fmt.Sprintf("%s.%s %s \n%s\n--------\nИсточник: %s\n\n", day, mouth, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+						inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 						anDate := utils.RandAnswer(otherPreDate)
 						response := inc + anDate
 
@@ -163,7 +163,7 @@ func main() {
 							resp.Text = err.Error()
 							resp.TTS = err.Error()
 						}
-						inc := fmt.Sprintf("%s.%s %s \n%s\n--------\nИсточник: %s\n\n", day, mouth, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+						inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 
 						anDate := utils.RandAnswer(otherPreDate)
 						response := inc + anDate
@@ -181,7 +181,7 @@ func main() {
 						if pen.Title != "" || mayak.Title != "" {
 							switch r.Request.Command {
 							case "паневин", "панёвин":
-								inc := fmt.Sprintf("%s\n%s\n%s\n--------\nИсточник:%s\n\n", pen.Date, pen.Title, pen.Text, pen.Source)
+								inc := fmt.Sprintf("%s\n%s\n--------\nИсточник:%s\n\n", pen.Title, pen.Text, pen.Source)
 								result := utils.DivideString(inc)
 								resp.TextArray = result
 
@@ -194,7 +194,7 @@ func main() {
 								})
 								return
 							case "маяковский":
-								inc := fmt.Sprintf("%s\n%s\n%s\n--------\nИсточник:%s\n\n", mayak.Date, mayak.Title, mayak.Description, mayak.Source)
+								inc := fmt.Sprintf("%s\n%s\n--------\nИсточник:%s\n\n", mayak.Title, mayak.Description, mayak.Source)
 								result := utils.DivideString(inc)
 								resp.TextArray = result
 
@@ -228,7 +228,7 @@ func main() {
 
 			switch p.Text {
 			case "еще":
-				inc := fmt.Sprintf("%s.%s %s \n%s\n--------\nИсточник: %s\n\n", day, mouth, utils.RandAnswer(incidents), pen.Title, pen.Source)
+				inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), pen.Title, pen.Source)
 				anDate := `Если интересуют другие события, назовите другую дату`
 				response := inc + anDate
 				resp.TextArray = []string{response, "Чтобы узнать подробности источника, скажите: Панёвин"}
@@ -246,7 +246,7 @@ func main() {
 					resp.TTS = err.Error()
 					return
 				}
-				inc := fmt.Sprintf("%s.%s %s \n%s\n--------\nИсточник: %s\n\n", day, mouth, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+				inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 				anDate := utils.RandAnswer(otherPreDate)
 				response := inc + anDate
 
@@ -271,7 +271,7 @@ func main() {
 					resp.Text = err.Error()
 					resp.TTS = err.Error()
 				}
-				inc := fmt.Sprintf("%s.%s %s \n%s\n--------\nИсточник: %s\n\n", day, mouth, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+				inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 				anDate := utils.RandAnswer(otherPreDate)
 				response := inc + anDate
 
@@ -292,7 +292,7 @@ func main() {
 					resp.Text = err.Error()
 					resp.TTS = err.Error()
 				}
-				inc := fmt.Sprintf("%s.%s %s \n%s\n--------\nИсточник: %s\n\n", day, mouth, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+				inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 				anDate := utils.RandAnswer(otherPreDate)
 				response := inc + anDate
 
@@ -306,7 +306,7 @@ func main() {
 				})
 				return
 			case "панёвин":
-				inc := fmt.Sprintf("%s\n%s\n%s\n--------\nИсточник:%s\n\n", pen.Date, pen.Title, pen.Text, pen.Source)
+				inc := fmt.Sprintf("%s\n%s\n--------\nИсточник:%s\n\n", pen.Title, pen.Text, pen.Source)
 				result := utils.DivideString(inc)
 				resp.TextArray = result
 
@@ -319,7 +319,7 @@ func main() {
 				})
 				return
 			case "маяковский":
-				inc := fmt.Sprintf("%s\n%s\n%s\n--------\nИсточник:%s\n\n", mayak.Date, mayak.Title, mayak.Description, mayak.Source)
+				inc := fmt.Sprintf("%s\n%s\n--------\nИсточник:%s\n\n", mayak.Title, mayak.Description, mayak.Source)
 				result := utils.DivideString(inc)
 				resp.TextArray = result
 
