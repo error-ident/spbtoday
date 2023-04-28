@@ -24,7 +24,6 @@ const (
 var (
 	incidents    = []string{" произошло вот что...\n", " было вот что...\n", " случилось такое событие...\n"}
 	otherPreDate = []string{"Если Вас интересуют другие события этого дня, скажите: \"ещё события\".\n", "Если Вас интересуют другие события этого дня, скажите: \"ещё события\", либо назовите другую дату."}
-	otherDate    = []string{"Если нужна другая дата, назовите её.", "Хотите ещё? Назовите другую дату."}
 	goodBye      = []string{"До новых встреч!", "До свидания!", "Всего доброго!", "Всего доброго! Хорошего дня!"}
 	pen, mayak   = &sender.Penevin{}, &sender.Mayakovsky{}
 	day, mouth   = "", ""
@@ -68,7 +67,7 @@ func main() {
 				return
 			default:
 				if utils.CheckCommand(r.Request.Command) {
-					day, mouth, err = convert.ConverterDate(r.Request.Command)
+					day, mouth, err = convert.ConverterToNumericDate(r.Request.Command)
 					if err != nil {
 						resp.Text = err.Error()
 						resp.TTS = err.Error()
@@ -82,7 +81,7 @@ func main() {
 						return
 					}
 
-					inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+					inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 					anDate := utils.RandAnswer(otherPreDate)
 					response := inc + anDate
 
@@ -98,7 +97,7 @@ func main() {
 				} else {
 					switch r.Request.Command {
 					case "еще", "ещё", "еще событие", "ещё событие", "еще события", "ещё события":
-						inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), pen.Title, pen.Source)
+						inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), pen.Title, pen.Source)
 						fulldata := "Чтобы узнать подробности источника, скажите: Панёвин"
 						response := inc
 						resp.TextArray = []string{response, fulldata}
@@ -110,14 +109,14 @@ func main() {
 
 					case "сегодня":
 						date := carbon.Now().Format(dm)
-						day, mouth = convert.ConvertCarbonDate(date)
+						day, mouth = convert.ConverterCarbonDate(date)
 						pen, mayak, err = sender.SendRequests(day, mouth)
 						if err != nil {
 							resp.Text = err.Error()
 							resp.TTS = err.Error()
 							return
 						}
-						inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+						inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 						anDate := utils.RandAnswer(otherPreDate)
 						response := inc + anDate
 
@@ -136,13 +135,13 @@ func main() {
 						return
 					case "завтра":
 						date := carbon.Tomorrow().Format(dm)
-						day, mouth = convert.ConvertCarbonDate(date)
+						day, mouth = convert.ConverterCarbonDate(date)
 						pen, mayak, err = sender.SendRequests(day, mouth)
 						if err != nil {
 							resp.Text = err.Error()
 							resp.TTS = err.Error()
 						}
-						inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+						inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 						anDate := utils.RandAnswer(otherPreDate)
 						response := inc + anDate
 
@@ -157,13 +156,13 @@ func main() {
 						return
 					case "вчера":
 						date := carbon.Yesterday().Format(dm)
-						day, mouth = convert.ConvertCarbonDate(date)
+						day, mouth = convert.ConverterCarbonDate(date)
 						pen, mayak, err = sender.SendRequests(day, mouth)
 						if err != nil {
 							resp.Text = err.Error()
 							resp.TTS = err.Error()
 						}
-						inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+						inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 
 						anDate := utils.RandAnswer(otherPreDate)
 						response := inc + anDate
@@ -181,7 +180,7 @@ func main() {
 						if pen.Title != "" || mayak.Title != "" {
 							switch r.Request.Command {
 							case "паневин", "панёвин":
-								inc := fmt.Sprintf("%s\n%s\n--------\nИсточник:%s\n\n", pen.Title, pen.Text, pen.Source)
+								inc := fmt.Sprintf("%s\n%s\n \n Источник: %s\n\n", pen.Title, pen.Text, pen.Source)
 								result := utils.DivideString(inc)
 								resp.TextArray = result
 
@@ -194,7 +193,7 @@ func main() {
 								})
 								return
 							case "маяковский":
-								inc := fmt.Sprintf("%s\n%s\n--------\nИсточник:%s\n\n", mayak.Title, mayak.Description, mayak.Source)
+								inc := fmt.Sprintf("%s\n%s\n \n Источник: %s\n\n", mayak.Title, mayak.Description, mayak.Source)
 								result := utils.DivideString(inc)
 								resp.TextArray = result
 
@@ -228,7 +227,7 @@ func main() {
 
 			switch p.Text {
 			case "еще":
-				inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), pen.Title, pen.Source)
+				inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), pen.Title, pen.Source)
 				anDate := `Если интересуют другие события, назовите другую дату`
 				response := inc + anDate
 				resp.TextArray = []string{response, "Чтобы узнать подробности источника, скажите: Панёвин"}
@@ -239,14 +238,14 @@ func main() {
 
 			case "Сегодня":
 				date = carbon.Now().Format(dm)
-				day, mouth = convert.ConvertCarbonDate(date)
+				day, mouth = convert.ConverterCarbonDate(date)
 				pen, mayak, err = sender.SendRequests(day, mouth)
 				if err != nil {
 					resp.Text = err.Error()
 					resp.TTS = err.Error()
 					return
 				}
-				inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+				inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 				anDate := utils.RandAnswer(otherPreDate)
 				response := inc + anDate
 
@@ -265,13 +264,13 @@ func main() {
 				return
 			case "Завтра":
 				date = carbon.Tomorrow().Format(dm)
-				day, mouth = convert.ConvertCarbonDate(date)
+				day, mouth = convert.ConverterCarbonDate(date)
 				pen, mayak, err = sender.SendRequests(day, mouth)
 				if err != nil {
 					resp.Text = err.Error()
 					resp.TTS = err.Error()
 				}
-				inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+				inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 				anDate := utils.RandAnswer(otherPreDate)
 				response := inc + anDate
 
@@ -286,13 +285,13 @@ func main() {
 				return
 			case "Вчера":
 				date = carbon.Yesterday().Format(dm)
-				day, mouth = convert.ConvertCarbonDate(date)
+				day, mouth = convert.ConverterCarbonDate(date)
 				pen, mayak, err = sender.SendRequests(day, mouth)
 				if err != nil {
 					resp.Text = err.Error()
 					resp.TTS = err.Error()
 				}
-				inc := fmt.Sprintf("%s %s \n%s\n--------\nИсточник: %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+				inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 				anDate := utils.RandAnswer(otherPreDate)
 				response := inc + anDate
 
@@ -306,7 +305,7 @@ func main() {
 				})
 				return
 			case "панёвин":
-				inc := fmt.Sprintf("%s\n%s\n--------\nИсточник:%s\n\n", pen.Title, pen.Text, pen.Source)
+				inc := fmt.Sprintf("%s\n%s\n \n Источник: %s\n\n", pen.Title, pen.Text, pen.Source)
 				result := utils.DivideString(inc)
 				resp.TextArray = result
 
@@ -319,7 +318,7 @@ func main() {
 				})
 				return
 			case "маяковский":
-				inc := fmt.Sprintf("%s\n%s\n--------\nИсточник:%s\n\n", mayak.Title, mayak.Description, mayak.Source)
+				inc := fmt.Sprintf("%s\n%s\n \n Источник: %s\n\n", mayak.Title, mayak.Description, mayak.Source)
 				result := utils.DivideString(inc)
 				resp.TextArray = result
 

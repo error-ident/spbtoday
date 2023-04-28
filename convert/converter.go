@@ -55,8 +55,7 @@ var days = map[string]string{
 	"тридцать первое":    "31",
 }
 
-func ConverterDate(str string) (day, month string, err error) {
-	// Разделение строки на составляющие
+func ConverterToNumericDate(str string) (day, month string, err error) {
 	split := strings.Split(str, " ")
 	var dayStr, monthStr string
 	switch len(split) {
@@ -80,7 +79,7 @@ func ConverterDate(str string) (day, month string, err error) {
 	return day, month, nil
 }
 
-func ConvertCarbonDate(dm string) (string, string) {
+func ConverterCarbonDate(dm string) (string, string) {
 	date := strings.Split(dm, ".")
 	d := date[0]
 	m := date[1]

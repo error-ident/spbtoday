@@ -3,6 +3,7 @@ package utils
 import (
 	"github.com/dlclark/regexp2"
 	"math/rand"
+	"strings"
 	"time"
 )
 
@@ -17,18 +18,20 @@ func RandAnswer(answer []string) string {
 
 func DivideString(s string) []string {
 	var chunks []string
-	runes := []rune(s)
-	for i := 0; i < len(runes); i += 1024 {
-		end := i + 1024
-		if end > len(runes) {
-			end = len(runes)
+	var sb strings.Builder
+	words := strings.Fields(s)
+	for i := range words {
+		if sb.Len()+len(words[i])+1 > 1024 {
+			chunks = append(chunks, sb.String()+" ...")
+			sb.Reset()
 		}
-		if end == len(runes) {
-			chunks = append(chunks, string(runes[i:end])+"\nХотите узнать ещё? Назовите другую дату...")
-		} else {
-			chunks = append(chunks, string(runes[i:end])+"...")
+		if sb.Len() > 0 {
+			sb.WriteByte(' ')
 		}
-
+		sb.WriteString(words[i])
+	}
+	if sb.Len() > 0 {
+		chunks = append(chunks, sb.String())
 	}
 	return chunks
 }
