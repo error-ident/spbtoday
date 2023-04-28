@@ -81,7 +81,7 @@ func main() {
 						return
 					}
 
-					inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+					inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", convert.ConverterToRussianTextDate(pen.Date), utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 					anDate := utils.RandAnswer(otherPreDate)
 					response := inc + anDate
 
@@ -97,7 +97,7 @@ func main() {
 				} else {
 					switch r.Request.Command {
 					case "еще", "ещё", "еще событие", "ещё событие", "еще события", "ещё события":
-						inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), pen.Title, pen.Source)
+						inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", convert.ConverterToRussianTextDate(pen.Date), utils.RandAnswer(incidents), pen.Title, pen.Source)
 						fulldata := "Чтобы узнать подробности источника, скажите: Панёвин"
 						response := inc
 						resp.TextArray = []string{response, fulldata}
@@ -116,7 +116,7 @@ func main() {
 							resp.TTS = err.Error()
 							return
 						}
-						inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+						inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", convert.ConverterToRussianTextDate(pen.Date), utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 						anDate := utils.RandAnswer(otherPreDate)
 						response := inc + anDate
 
@@ -141,7 +141,7 @@ func main() {
 							resp.Text = err.Error()
 							resp.TTS = err.Error()
 						}
-						inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+						inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", convert.ConverterToRussianTextDate(pen.Date), utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 						anDate := utils.RandAnswer(otherPreDate)
 						response := inc + anDate
 
@@ -162,7 +162,7 @@ func main() {
 							resp.Text = err.Error()
 							resp.TTS = err.Error()
 						}
-						inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+						inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", convert.ConverterToRussianTextDate(pen.Date), utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 
 						anDate := utils.RandAnswer(otherPreDate)
 						response := inc + anDate
@@ -227,7 +227,7 @@ func main() {
 
 			switch p.Text {
 			case "еще":
-				inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), pen.Title, pen.Source)
+				inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", convert.ConverterToRussianTextDate(pen.Date), utils.RandAnswer(incidents), pen.Title, pen.Source)
 				anDate := `Если интересуют другие события, назовите другую дату`
 				response := inc + anDate
 				resp.TextArray = []string{response, "Чтобы узнать подробности источника, скажите: Панёвин"}
@@ -245,7 +245,7 @@ func main() {
 					resp.TTS = err.Error()
 					return
 				}
-				inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+				inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", convert.ConverterToRussianTextDate(pen.Date), utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 				anDate := utils.RandAnswer(otherPreDate)
 				response := inc + anDate
 
@@ -270,7 +270,7 @@ func main() {
 					resp.Text = err.Error()
 					resp.TTS = err.Error()
 				}
-				inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+				inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", convert.ConverterToRussianTextDate(pen.Date), utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 				anDate := utils.RandAnswer(otherPreDate)
 				response := inc + anDate
 
@@ -291,7 +291,7 @@ func main() {
 					resp.Text = err.Error()
 					resp.TTS = err.Error()
 				}
-				inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", pen.Date, utils.RandAnswer(incidents), mayak.Title, mayak.Source)
+				inc := fmt.Sprintf("%s %s \n%s\n \n Источник:  %s\n\n", convert.ConverterToRussianTextDate(pen.Date), utils.RandAnswer(incidents), mayak.Title, mayak.Source)
 				anDate := utils.RandAnswer(otherPreDate)
 				response := inc + anDate
 
