@@ -122,7 +122,7 @@ func ConverterToNumericDate(str string) (day, month string, err error) {
 	if !ok {
 		return "", "", fmt.Errorf("неправильный формат дня: %s", dayStr)
 	}
-	month, ok = toTextMonths[monthStr]
+	month, ok = months[monthStr]
 	if !ok {
 		return "", "", fmt.Errorf("неправильный формат месяца: %s", monthStr)
 	}
