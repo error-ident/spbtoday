@@ -182,6 +182,7 @@ func main() {
 							case "паневин", "панёвин":
 								inc := fmt.Sprintf("%s\n%s\n \n Источник: %s\n\n", pen.Title, pen.Text, pen.Source)
 								result := utils.DivideString(inc)
+								result = append(result, "Чтобы узнать другие события, назовите другую дату или скажите \"ещё события\"")
 								resp.TextArray = result
 
 								resp.AddButton("Завтра", myPayload{
@@ -195,6 +196,7 @@ func main() {
 							case "маяковский":
 								inc := fmt.Sprintf("%s\n%s\n \n Источник: %s\n\n", mayak.Title, mayak.Description, mayak.Source)
 								result := utils.DivideString(inc)
+								result = append(result, "Чтобы узнать другие события, назовите другую дату")
 								resp.TextArray = result
 
 								resp.AddButton("Завтра", myPayload{

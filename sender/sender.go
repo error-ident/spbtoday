@@ -114,7 +114,7 @@ func SendRequests(day, month string) (*Penevin, *Mayakovsky, error) {
 
 func ProcessingRequestData(result0, result1 chan []byte) (*Penevin, *Mayakovsky, error) {
 	var p Penevin
-	mlist := []Mayakovsky{}
+	var mList []Mayakovsky
 
 	//fmt.Println(string(<-result1), string(<-result0))
 	select {
@@ -135,7 +135,7 @@ func ProcessingRequestData(result0, result1 chan []byte) (*Penevin, *Mayakovsky,
 		if ok {
 			regex := regexp.MustCompile(`<[^>]*>|\\n`)
 			result := regex.ReplaceAll(res1, []byte{})
-			if err := json.Unmarshal(result, &mlist); err != nil {
+			if err := json.Unmarshal(result, &mList); err != nil {
 				return nil, nil, fmt.Errorf("Error parsing result1: %s\n", err.Error())
 			}
 		}
@@ -144,8 +144,8 @@ func ProcessingRequestData(result0, result1 chan []byte) (*Penevin, *Mayakovsky,
 	}
 
 	p.Source = "Петербургский календарь Панёвина"
-	mlist[0].Source = "Библиотека Маяковского"
+	mList[0].Source = "Библиотека Маяковского"
 
-	return &p, &mlist[0], nil
+	return &p, &mList[0], nil
 
 }
