@@ -196,7 +196,7 @@ func main() {
 							case "маяковский":
 								inc := fmt.Sprintf("%s\n%s\n \n Источник: %s\n\n", mayak.Title, mayak.Description, mayak.Source)
 								result := utils.DivideString(inc)
-								result = append(result, "Чтобы узнать другие события, назовите другую дату или скажите \"ещё события\"")
+								result = append(result, "Чтобы узнать другие события дня, скажите \"ещё события\", или назовите другую интересующую Вас дату.")
 								resp.TextArray = result
 
 								resp.AddButton("Завтра", myPayload{
