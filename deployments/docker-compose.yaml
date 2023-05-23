@@ -1,0 +1,12 @@
+version: "3.9"
+
+services:
+
+  #App service
+  app:
+    container_name: "spbtoday"
+    image: spbtoday:1.0.0
+    restart: on-failure
+    ports:
+      - "1337:1337"
+
