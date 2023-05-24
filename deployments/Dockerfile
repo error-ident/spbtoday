@@ -10,5 +10,5 @@ RUN CGO_ENABLED=0 go build -o /app/spbtoday main.go
 FROM alpine:latest
 WORKDIR /app
 COPY --from=build /app/spbtoday .
-EXPOSE 1337
+EXPOSE 8026
 CMD ["/app/spbtoday"]

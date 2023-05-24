@@ -23,7 +23,7 @@ const (
 
 var (
 	incidents    = []string{" произошло вот что...\n", " было вот что...\n", " случилось такое событие...\n"}
-	otherPreDate = "Чтобы узнать подробности интересующего источника, скажите: \"первый\" или \"второй\" или назовите другую дату для продолжения."
+	otherPreDate = "Про какое событие вы хотите узнать подробнее? Скажите: «про первое» или «про второе», или назовите другую дату для продолжения."
 	goodBye      = []string{"До новых встреч!", "До свидания!", "Всего доброго!", "Всего доброго! Хорошего дня!"}
 	pen, mayak   = &sender.Penevin{}, &sender.Mayakovsky{}
 	day, mouth   = "", ""
@@ -320,7 +320,7 @@ func main() {
 
 	http.HandleFunc("/spbtoday", wh.HandleFunc)
 
-	if err := http.ListenAndServe(":1337", nil); err != nil {
+	if err := http.ListenAndServe(":8026", nil); err != nil {
 		log.Fatal(err)
 	}
 }
