@@ -23,7 +23,7 @@ const (
 
 var (
 	incidents    = []string{" произошло вот что...\n", " было вот что...\n", " случилось такое событие...\n"}
-	otherPreDate = "Про какое событие вы хотите узнать подробнее? Скажите: «про первое» или «про второе», или назовите другую дату для продолжения."
+	otherPreDate = "Про какое событие вы хотите узнать подробнее? Скажите: «первое» или «второе», или назовите другую дату для продолжения."
 	goodBye      = []string{"До новых встреч!", "До свидания!", "Всего доброго!", "Всего доброго! Хорошего дня!"}
 	pen, mayak   = &sender.Penevin{}, &sender.Mayakovsky{}
 	day, mouth   = "", ""
@@ -163,7 +163,7 @@ func main() {
 					default:
 						if pen.Title != "" || mayak.Title != "" {
 							switch r.Request.Command {
-							case "первое", "1", "первый", "один", "про первое":
+							case "первое", "1", "первый", "один":
 								inc := fmt.Sprintf("%s\n%s\n \n Источник: %s\n\n", mayak.Title, mayak.Description, mayak.Source)
 								result := utils.DivideString(inc)
 								result = append(result, "Узнайте подробнее о втором событии, сказав: \"второе\", или скажите другую дату")
@@ -178,7 +178,7 @@ func main() {
 								})
 								return
 
-							case "второе", "2", "два", "про второе", "второй":
+							case "второе", "2", "два", "второй":
 								inc := fmt.Sprintf("%s\n%s\n \n Источник: %s\n\n", pen.Title, pen.Text, pen.Source)
 								result := utils.DivideString(inc)
 								result = append(result, "Узнайте подробнее о первом событии, сказав: \"первое\", или скажите другую дату")
@@ -278,7 +278,7 @@ func main() {
 					Text: "второй",
 				})
 				return
-			case "первое", "1", "первый", "один", "про первое":
+			case "первое", "1", "первый", "один":
 				inc := fmt.Sprintf("%s\n%s\n \n Источник: %s\n\n", mayak.Title, mayak.Description, mayak.Source)
 				result := utils.DivideString(inc)
 				result = append(result, "Если Вас интересуют второе событие этого дня, скажите: \"второе\" или назовите другую дату.")
@@ -292,7 +292,7 @@ func main() {
 					Text: "Хватит",
 				})
 				return
-			case "второе", "2", "два", "про второе", "второй":
+			case "второе", "2", "два", "второй":
 				inc := fmt.Sprintf("%s\n%s\n \n Источник: %s\n\n", pen.Title, pen.Text, pen.Source)
 				result := utils.DivideString(inc)
 				result = append(result, "Если Вас интересуют пеовое событие этого дня, скажите: \"первое\" или назовите другую дату.")
