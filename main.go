@@ -25,7 +25,7 @@ var (
 	incidents    = []string{" произошло вот что...\n", " было вот что...\n", " случилось такое событие...\n"}
 	otherPreDate = "Про какое событие вы хотите узнать подробнее? Скажите: «первое» или «второе», или назовите другую дату для продолжения."
 	goodBye      = []string{"До новых встреч!", "До свидания!", "Всего доброго!", "Всего доброго! Хорошего дня!"}
-	pen, mayak   = &sender.Penevin{}, &sender.Mayakovsky{}
+	pen, mayak   = &sender.Penevin{}, &sender.MayakovskyItem{}
 	day, mouth   = "", ""
 	wh           = marusia.NewWebhook()
 	err          error

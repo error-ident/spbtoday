@@ -22,6 +22,11 @@ type Penevin struct {
 }
 
 type Mayakovsky struct {
+	Count int              `json:"count"`
+	Data  []MayakovskyItem `json:"data"`
+}
+
+type MayakovskyItem struct {
 	ID          int    `json:"id"`
 	Title       string `json:"title"`
 	Date        string `json:"date"`
@@ -42,11 +47,11 @@ var sources = []struct {
 	{
 		id:     1,
 		source: "Библиотека Маяковского",
-		url:    "http://84.201.142.84:8005/memorable_dates/date/day/{day}/month/{month}",
+		url:    "https://yazzh.gate.petersburg.ru/memorable_dates/date/?day={day}&month={month}",
 	},
 }
 
-func SendRequests(day, month string) (*Penevin, *Mayakovsky, error) {
+func SendRequests(day, month string) (*Penevin, *MayakovskyItem, error) {
 	var wg sync.WaitGroup
 
 	// Создаем каналы для результатов запросов
@@ -112,9 +117,9 @@ func SendRequests(day, month string) (*Penevin, *Mayakovsky, error) {
 
 }
 
-func ProcessingRequestData(result0, result1 chan []byte) (*Penevin, *Mayakovsky, error) {
+func ProcessingRequestData(result0, result1 chan []byte) (*Penevin, *MayakovskyItem, error) {
 	var p Penevin
-	var mList []Mayakovsky
+	var mList Mayakovsky
 
 	//fmt.Println(string(<-result1), string(<-result0))
 	select {
@@ -135,7 +140,9 @@ func ProcessingRequestData(result0, result1 chan []byte) (*Penevin, *Mayakovsky,
 		if ok {
 			regex := regexp.MustCompile(`<[^>]*>|\\n`)
 			result := regex.ReplaceAll(res1, []byte{})
+			log.Println(string(result))
 			if err := json.Unmarshal(result, &mList); err != nil {
+				log.Println(err)
 				return nil, nil, fmt.Errorf("Error parsing result1: %s\n", err.Error())
 			}
 		}
@@ -143,9 +150,11 @@ func ProcessingRequestData(result0, result1 chan []byte) (*Penevin, *Mayakovsky,
 		return nil, nil, fmt.Errorf("timeout while reading result1")
 	}
 
-	p.Source = "Петербургский календарь Панёвина"
-	mList[0].Source = "Библиотека Маяковского"
+	log.Println(mList)
 
-	return &p, &mList[0], nil
+	p.Source = "Петербургский календарь Панёвина"
+	mList.Data[0].Source = "Библиотека Маяковского"
+
+	return &p, &mList.Data[0], nil
 
 }
