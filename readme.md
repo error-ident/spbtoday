@@ -17,8 +17,8 @@ ___
 * за что пить в Питере
 
 **Источники API**: 
-* [Библиотека Маяковского](https://api.petersburg.ru/services/dannyye-o-pamyatnykh-sobytiyakh-sankt-peterburga-2)
-* [Петербургский календарь Панёвина](https://api.petersburg.ru/services/dannyye-o-pamyatnykh-sobytiyakh-sankt-peterburga-1)
+* [Библиотека Маяковского](https://api.petersburg.ru/mainPortal/api_services/view/2217)
+* [Петербургский календарь Панёвина](https://api.petersburg.ru/mainPortal/api_services/view/2258)
 
 ___
 Скилл реализован в рамках **Экосистемы Городских Сервисов [Цифровой Петербург](https://petersburg.ru)**
